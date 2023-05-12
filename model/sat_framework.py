@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 
-from model.sat_config import SATConfig
+from model.config import SATConfig
 
 
 class SATFramework(nn.Module):
