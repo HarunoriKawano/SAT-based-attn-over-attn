@@ -4,7 +4,7 @@ import torch
 from torch import nn
 from torch.nn.functional import cross_entropy
 
-from model import SATConfig, SATFramework
+from model import Config, SATFramework
 
 
 class ExampleLowLayers(nn.Module):
@@ -35,7 +35,7 @@ if __name__ == '__main__':
     print(f"Use device: {device}")
 
     with open("config.json", "r", encoding="utf-8") as f:
-        config = SATConfig(**json.load(f))
+        config = Config(**json.load(f))
 
     low_layers = ExampleLowLayers(config.hidden_size).to(device)
     high_layers = ExampleHighLayers(config.hidden_size + config.d_vector_size).to(device)

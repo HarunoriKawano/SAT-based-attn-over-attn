@@ -1,11 +1,11 @@
 import torch
 from torch import nn
 
-from model.config import SATConfig
+from model.config import Config
 
 
 class SATFramework(nn.Module):
-    def __init__(self, config: SATConfig, low_layers: nn.Module, high_layers: nn.Module):
+    def __init__(self, config: Config, low_layers: nn.Module, high_layers: nn.Module):
         super().__init__()
         self.low_layers = low_layers
         self.high_layers = high_layers
