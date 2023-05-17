@@ -47,10 +47,13 @@ class SATFramework(nn.Module):
         # `(B, T, N)`
         similarity_degrees = torch.matmul(self.m_linear(hidden_states), self.memory.T)
 
+        # `(B, T, N)'. Probability of memories per frame.
         memory_level_attentions = torch.softmax(similarity_degrees, dim=-1)
 
+        # `(B, T)`. Probability of frame.
         frame_level_attentions = torch.softmax(similarity_degrees, dim=-2).sum(-1) / similarity_degrees.size(-1)
 
+        # `(B, N)`. Similarity of utterance and memories.
         attention_scores = torch.matmul(
             memory_level_attentions.transpose(-1, -2), frame_level_attentions.unsqueeze(-1)
         ).squeeze()
